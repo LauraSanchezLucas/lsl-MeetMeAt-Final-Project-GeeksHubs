@@ -10,19 +10,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true,
+        required: true,
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       place: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        required: true,
       },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        required: true,
       },
       hour: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        required: true,
       },
       createdAt: {
         allowNull: false,
