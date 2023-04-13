@@ -10,22 +10,35 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        required: true,
+        unique: true,
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        required: true,
+        unique: true,
       },
       phone: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        required: true,
       },
       notes: {
         type: Sequelize.STRING
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'Users',
+          key: 'id',
+        }
       },
       specialty_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'Specialties',
+          key: 'id',
+        }
       },
       createdAt: {
         allowNull: false,

@@ -10,13 +10,25 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'Users',
+          key: 'id',
+        }
       },
       event_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'Events',
+          key: 'id',
+        }
       },
       business_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'Bussinesses',
+          key: 'id',
+        }
       },
       createdAt: {
         allowNull: false,
