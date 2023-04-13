@@ -1,10 +1,20 @@
 const express = require('express');
-const app = express();
 
-const PORT = process.env.PORT || 4000;
+const db = require('./db.js');
+require('dotenv').config();
+
+// 
+
+const app = express();
 
 app.use(express.json());
 
-app.listen(PORT, ()=>{
-    console.log(`Server on port ${PORT}`);
+
+const PORT = process.env.PORT || 4000;
+
+
+db.then(() => {
+    //Starting server
+    app.listen(PORT, () => console.log("Server on port " + PORT));
 })
+    .catch((err) => console.log(err.message)); 
