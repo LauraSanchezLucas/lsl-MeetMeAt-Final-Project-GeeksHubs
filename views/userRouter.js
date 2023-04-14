@@ -1,5 +1,6 @@
 const eventController = require('../controllers/eventController');
 const userController = require('../controllers/userController');
+const appointmentController = require('../controllers/appointmentController');
 const verifyToken= require('../middleware/verifyToken')
 
 const router = require ('express').Router();
@@ -11,5 +12,8 @@ router.put('/updateprofile', verifyToken, userController.updateProfile);
 // USER - EVENTS
 router.get('/allevents', eventController.getAllEvents);
 
+// USER - APPOINTMENTS
+
+router.post('/createappointment', verifyToken, appointmentController.createAppointment);
 
 module.exports = router;
