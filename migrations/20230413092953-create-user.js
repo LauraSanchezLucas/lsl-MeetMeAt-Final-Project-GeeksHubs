@@ -35,8 +35,8 @@ module.exports = {
           model: 'Roles',
           key: 'id',
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        // onUpdate: 'CASCADE',
+        // onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

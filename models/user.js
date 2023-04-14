@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'user_id'
       });
 
-      User.belongsToMany(models.Business,{
+      User.hasMany(models.Business,{
         foreignKey: 'user_id'
       });
     }
