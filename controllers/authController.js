@@ -49,6 +49,42 @@ authController.login = async (req, res) => {
     }
 };
 
+// LOGIN
+
+authController.register = async(req, res) => {
+    try {
+        const { name, surname, email, phone, password } = req.body;
+
+        const encryptedPassword = bcrypt.hashSync(password, 10);
+
+        const newUser = {
+            name: name,
+            surname: surname,
+            email: email,
+            phone: phone,
+            password: encryptedPassword,
+            role_id: 3
+        }
+
+        const user = await User.create(newUser);
+        return res.json(
+            {
+                success: true,
+                message: 'Registered user successfully',
+                user: user
+            }
+        )
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: true,
+                message: 'Something went wrong',
+                error_message: error.message
+            }
+        )
+    }
+};
+
 
 
 
