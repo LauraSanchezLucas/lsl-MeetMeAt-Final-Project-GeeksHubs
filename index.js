@@ -18,3 +18,7 @@ db.then(() => {
     app.listen(PORT, () => console.log('Server on port ' + PORT));
 })
     .catch((err) => console.log(err.message)); 
+
+    // app.get('/welcome', (req, res)=>{
+    //     return res.send('Yes it´s all rigth')
+    // })
