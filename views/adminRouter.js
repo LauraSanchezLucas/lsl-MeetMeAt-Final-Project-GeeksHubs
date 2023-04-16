@@ -2,6 +2,7 @@ const adminController = require('../controllers/adminController');
 const adminAppointmentController = require('../controllers/adminAppointmentController');
 const adminRoleController = require('../controllers/adminRoleController');
 const adminEventController = require('../controllers/adminEventController');
+const adminBusinessController = require('../controllers/adminBusinessController');
 const verifyToken= require('../middleware/verifyToken');
 const isAdmin= require('../middleware/isAdmin');
 
@@ -24,6 +25,8 @@ router.post('/newevent', verifyToken, isAdmin, adminEventController.createEvent)
 // ADMIN - ROLES
 router.post('/newrole', verifyToken, isAdmin, adminRoleController.newRole);
 
+// ADMIN - BUSINESS
+router.post('/newbusiness', verifyToken, isAdmin, adminBusinessController.createBusiness);
 
 
 
