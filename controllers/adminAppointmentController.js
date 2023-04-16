@@ -42,5 +42,34 @@ adminAppointmentController.createAppointmentAdmin = async(req, res) => {
     };
 }
 
+adminAppointmentController.deleteAppointmentById = async(req, res) => {
+    try {
+        const appointmentId = req.params.id;
+
+        const deleteAppointment = await Appointment.destroy(
+            {
+                where:{
+                    id: appointmentId
+                }
+            }
+        )
+        return res.json(
+            {
+                success: true,
+                message: 'Appointment deleted',
+                appointment: deleteAppointment
+            }
+        )
+} catch (error) {
+    return res.status(500).json(
+        {
+            success: false,
+            message: 'Something went wrong',
+            error_message: error.message
+        }
+    )
+};
+}
+
 
 module.exports = adminAppointmentController;

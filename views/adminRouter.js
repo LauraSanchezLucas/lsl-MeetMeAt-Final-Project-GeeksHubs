@@ -10,7 +10,7 @@ router.put('/updateuserprofile/:id', verifyToken, isAdmin, adminController.updat
 
 // ADMIN - APPOINTMENTS
 router.post('/newappointment', verifyToken, isAdmin, adminAppointmentController.createAppointmentAdmin);
-
+router.delete('/deleteappointment/:id', verifyToken, isAdmin, adminAppointmentController.deleteAppointmentById);
 
 // ADMIN - BUSINESS
 
