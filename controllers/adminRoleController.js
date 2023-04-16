@@ -28,6 +28,35 @@ adminRoleController.newRole = async(req, res) => {
     )
 };
 }
+adminRoleController.deleteRoleById = async(req, res) => {
+    try {
+        const RoleId = req.params.id;
+
+        const deleteRole = await Role.destroy(
+            {
+                where:{
+                    id: RoleId
+                }
+            }
+        )
+        return res.json(
+            {
+                success: true,
+                message: 'Role deleted',
+                deleteRole: deleteRole
+            }
+        )
+} catch (error) {
+    return res.status(500).json(
+        {
+            success: false,
+            message: 'Something went wrong',
+            error_message: error.message
+        }
+    )
+};
+}
+
 
 
 module.exports = adminRoleController;
