@@ -9,6 +9,7 @@ const router = require ('express').Router();
 // ADMIN - USER
 router.put('/updateuserprofile/:id', verifyToken, isAdmin, adminController.updateUserByAdmin);
 router.get('/allusers', verifyToken, isAdmin, adminController.findAllUsersAdmin);
+router.delete('/cancelluser/:id', verifyToken, isAdmin, adminController.deleteUserByAdmin);
 
 // ADMIN - APPOINTMENTS
 router.post('/newappointment', verifyToken, isAdmin, adminAppointmentController.createAppointmentAdmin);

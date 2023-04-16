@@ -14,21 +14,27 @@ module.exports = {
         references:{
           model: 'Users',
           key: 'id',
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       event_id: {
         type: Sequelize.INTEGER,
         references:{
           model: 'Events',
           key: 'id',
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       business_id: {
         type: Sequelize.INTEGER,
         references:{
           model: 'Businesses',
           key: 'id',
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

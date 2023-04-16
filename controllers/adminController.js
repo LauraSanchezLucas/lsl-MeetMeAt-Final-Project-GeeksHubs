@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Appointment } = require('../models');
 // const bcrypt = require('bcrypt');
 
 const adminController = {};
@@ -75,5 +75,41 @@ adminController.findAllUsersAdmin = async(req, res) => {
         )
     }
 };
+
+adminController.deleteUserByAdmin = async(req, res) => {
+    try {
+        const user = req.params.id;
+
+        // Find and delete all appointments from that user
+        await Appointment.destroy({
+            where:{
+                user_id: user
+            }
+        })
+        const deleteUser = await User.destroy(
+            {
+                where:{
+                    id:user
+                }
+            }
+        )
+        return res.send(
+            {
+            success: true,
+            message: 'User deleted successfully',
+            deleteUser: deleteUser
+            }
+        )
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: false,
+                message: 'Something went wrong',
+                error_message: error.message
+            }
+        )
+    }
+};
+
 
 module.exports = adminController;

@@ -31,14 +31,18 @@ module.exports = {
         references:{
           model: 'Users',
           key: 'id',
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       specialty_id: {
         type: Sequelize.INTEGER,
         references:{
           model: 'Specialties',
           key: 'id',
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
