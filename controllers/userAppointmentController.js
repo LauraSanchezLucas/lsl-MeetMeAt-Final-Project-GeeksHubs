@@ -6,6 +6,16 @@ userAppointmentController.createAppointment = async (req, res) =>{
     try {
         const { user_id, event_id, business_id } = req.body;
         const userId = req.userId;
+        const existAppointment = await Appointment.findOne({
+            user_id: user_id,
+            event_id: event_id
+        });
+        if(existAppointment){
+            return res.status(400).json({
+                success: true,
+                message: 'Appointment already exists',
+            })
+        }
 
         const newAppointment = {
             user_id: userId,
