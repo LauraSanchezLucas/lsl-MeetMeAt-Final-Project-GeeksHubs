@@ -15,5 +15,6 @@ router.get('/allevents', eventController.getAllEvents);
 // USER - APPOINTMENTS
 
 router.post('/createappointment', verifyToken, appointmentController.createAppointment);
+router.get('/getappointment', verifyToken, appointmentController.getAppointment);
 
 module.exports = router;

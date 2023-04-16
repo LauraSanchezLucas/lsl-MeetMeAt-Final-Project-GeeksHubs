@@ -1,4 +1,4 @@
-const { Appointment } = require('../models');
+const { Appointment, Business, User, Event } = require('../models');
 
 const appointmentController = {};
 
@@ -17,8 +17,58 @@ appointmentController.createAppointment = async (req, res) =>{
         return res.json(
             {
                 success: true,
-                message: 'Registeres appointment successfully',
+                message: 'Registered appointment successfully',
                 appointment: appointment
+            }
+        );
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: false,
+                message: 'Something went wrong',
+                error_message: error.message
+            }
+        )
+    };
+}
+
+appointmentController.getAppointment = async(req, res) => {
+    try {
+        const userAppointment = await Appointment.findAll(
+            {
+                where:{
+                    user_id: req.userId
+                },
+                include:[
+                    {
+                        model: Business,
+                        attributes:{
+                            exclude: ["id", "user_id", "name", "email", "phone", "notes", "specialty_id", "createdAt", "updatedAt"]
+                        },
+                        include:{
+                            model: User,
+                            attributes: {
+                                exclude: ["id", "password", "role_id", "createdAt", "updatedAt"]
+                            },
+                        }
+                    },
+                    {
+                        model: Event,
+                        attributes:{
+                            exclude: ["id", "description",  "createdAt", "updatedAt"]
+                        },
+                    },
+                ],
+                attributes:{
+                    exclude: ["id", "user_id", "business_id", "event_id", "createdAt", "updatedAt"]
+                }
+            }
+        )
+        return res.json(
+            {
+                success: true,
+                message: 'Access appointments successfully',
+                userAppointment: userAppointment
             }
         );
     } catch (error) {
