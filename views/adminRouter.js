@@ -1,5 +1,6 @@
 const adminController = require('../controllers/adminController');
 const adminAppointmentController = require('../controllers/adminAppointmentController');
+const adminRoleController = require('../controllers/adminRoleController');
 const verifyToken= require('../middleware/verifyToken');
 const isAdmin= require('../middleware/isAdmin');
 
@@ -11,8 +12,11 @@ router.put('/updateuserprofile/:id', verifyToken, isAdmin, adminController.updat
 // ADMIN - APPOINTMENTS
 router.post('/newappointment', verifyToken, isAdmin, adminAppointmentController.createAppointmentAdmin);
 router.delete('/deleteappointment/:id', verifyToken, isAdmin, adminAppointmentController.deleteAppointmentById);
+router.get('/getappointment', verifyToken, isAdmin, adminAppointmentController.getAppointmentAdmin);
 
 // ADMIN - BUSINESS
 
+// ADMIN - ROLES
+router.post('/newrole', verifyToken, isAdmin, adminRoleController.newRole);
 
 module.exports = router;
