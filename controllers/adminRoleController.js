@@ -28,4 +28,6 @@ adminRoleController.newRole = async(req, res) => {
     )
 };
 }
+
+
 module.exports = adminRoleController;
