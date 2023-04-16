@@ -1,5 +1,5 @@
 const { User } = require('../models');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 const adminController = {};
 
@@ -49,5 +49,31 @@ adminController.updateUserByAdmin = async(req, res) => {
     }
 };
 
+adminController.findAllUsersAdmin = async(req, res) => {
+    try {
+        const user = await User.findAll(
+        {
+            attributes: {
+                exclude: ["id", "password", "createdAt", "updatedAt"]
+            }
+        }
+        );
+        return res.send(
+            {
+            success: true,
+            message: 'Access profiles successfully',
+            user: user
+            }
+        )
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: false,
+                message: 'Something went wrong',
+                error_message: error.message
+            }
+        )
+    }
+};
 
 module.exports = adminController;

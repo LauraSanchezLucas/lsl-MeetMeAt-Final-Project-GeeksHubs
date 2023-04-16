@@ -97,7 +97,7 @@ adminAppointmentController.getAppointmentAdmin = async(req, res) => {
         return res.json(
             {
                 success: true,
-                message: 'Role created successfully',
+                message: 'Access appointments successfully',
                 userAppointment: userAppointment
             }
         )
