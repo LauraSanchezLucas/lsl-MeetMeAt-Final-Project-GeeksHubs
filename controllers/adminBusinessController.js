@@ -2,34 +2,34 @@ const { Business, User, Role } = require('../models')
 
 const adminBusinessController = {};
 
-// adminBusinessController.deleteEventById = async(req, res) => {
-//     try {
-//         const eventId = req.params.id;
+adminBusinessController.deleteBusinessById = async(req, res) => {
+    try {
+        const businessId = req.params.id;
 
-//         const deleteEvent = await Event.destroy(
-//             {
-//                 where:{
-//                     id: eventId
-//                 }
-//             }
-//         )
-//         return res.json(
-//             {
-//                 success: true,
-//                 message: 'Event deleted',
-//                 deleteEvent: deleteEvent
-//             }
-//         )
-// } catch (error) {
-//     return res.status(500).json(
-//         {
-//             success: false,
-//             message: 'Something went wrong',
-//             error_message: error.message
-//         }
-//     )
-// };
-// }
+        const deleteBusiness = await Business.destroy(
+            {
+                where:{
+                    id: businessId
+                }
+            }
+        )
+        return res.json(
+            {
+                success: true,
+                message: 'Event deleted',
+                deleteBusiness: deleteBusiness
+            }
+        )
+} catch (error) {
+    return res.status(500).json(
+        {
+            success: false,
+            message: 'Something went wrong',
+            error_message: error.message
+        }
+    )
+};
+}
 
 adminBusinessController.createBusiness = async (req, res) =>{
     try {
