@@ -5,18 +5,15 @@ const adminController = {};
 
 adminController.updateUserByAdmin = async(req, res) => {
     try {
-        const { name, surname, email, phone, password } = req.body;
+        const { name, surname, phone } = req.body;
         const userId = req.params.id;
 
-        const encryptedPassword = bcrypt.hashSync(password, 10);
 
         const updateProfile = await User.update(
             {
                 name: name,
                 surname: surname,
-                email: email,
                 phone: phone,
-                password: encryptedPassword
             },
             {
                 where:{

@@ -29,18 +29,14 @@ userController.profile = async(req, res) => {
 
 userController.updateProfile = async(req, res) => {
     try {
-        const { name, surname, email, phone, password } = req.body;
+        const { name, surname, phone } = req.body;
         const userId = req.userId;
-
-        const encryptedPassword = bcrypt.hashSync(password, 10);
 
         const updateProfile = await User.update(
             {
                 name: name,
                 surname: surname,
-                email: email,
                 phone: phone,
-                password: encryptedPassword
             },
             {
                 where:{
