@@ -1,8 +1,8 @@
 const { Appointment, Business, User, Event } = require('../models');
 
-const appointmentController = {};
+const userAppointmentController = {};
 
-appointmentController.createAppointment = async (req, res) =>{
+userAppointmentController.createAppointment = async (req, res) =>{
     try {
         const { user_id, event_id, business_id } = req.body;
         const userId = req.userId;
@@ -32,7 +32,7 @@ appointmentController.createAppointment = async (req, res) =>{
     };
 }
 
-appointmentController.getAppointment = async(req, res) => {
+userAppointmentController.getAppointment = async(req, res) => {
     try {
         const userAppointment = await Appointment.findAll(
             {
@@ -81,7 +81,8 @@ appointmentController.getAppointment = async(req, res) => {
         )
     };
 }
-appointmentController.deleteAppointmentById = async(req, res) =>{
+
+userAppointmentController.deleteAppointmentById = async(req, res) =>{
     try {
         const appointment = req.params.id;
 
@@ -122,6 +123,4 @@ appointmentController.deleteAppointmentById = async(req, res) =>{
 };
 }
 
-
-
-module.exports = appointmentController;
+module.exports = userAppointmentController;

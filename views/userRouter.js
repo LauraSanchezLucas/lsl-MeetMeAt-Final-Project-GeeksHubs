@@ -1,6 +1,6 @@
 const eventController = require('../controllers/eventController');
 const userController = require('../controllers/userController');
-const appointmentController = require('../controllers/appointmentController');
+const userAppointmentController = require('../controllers/userAppointmentController');
 const businessController = require('../controllers/businessController');
 const verifyToken= require('../middleware/verifyToken')
 
@@ -14,9 +14,9 @@ router.put('/updateprofile', verifyToken, userController.updateProfile);
 router.get('/allevents', eventController.getAllEvents);
 
 // USER - APPOINTMENTS
-router.post('/createappointment', verifyToken, appointmentController.createAppointment);
-router.get('/appointment', verifyToken, appointmentController.getAppointment);
-router.delete('/cancelappointment/:id', verifyToken, appointmentController.deleteAppointmentById);
+router.post('/createappointment', verifyToken, userAppointmentController.createAppointment);
+router.get('/appointment', verifyToken, userAppointmentController.getAppointment);
+router.delete('/cancelappointment/:id', verifyToken, userAppointmentController.deleteAppointmentById);
 
 // USER - BUSINESS
 router.get('/business', businessController.getAllBusiness);
