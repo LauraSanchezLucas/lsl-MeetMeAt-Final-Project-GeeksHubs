@@ -25,6 +25,7 @@ router.post('/newevent', verifyToken, isAdmin, adminEventController.createEvent)
 // ADMIN - ROLES
 router.post('/newrole', verifyToken, isAdmin, adminRoleController.newRole);
 router.delete('/deleterole/:id', verifyToken, isAdmin, adminRoleController.deleteRoleById);
+router.post('/newuserrole/:id', verifyToken, isAdmin, adminRoleController.newUserRole);
 
 // ADMIN - BUSINESS
 router.post('/newbusiness', verifyToken, isAdmin, adminBusinessController.createBusiness);

@@ -1,4 +1,4 @@
-const { Role } = require('../models');
+const { Role, User } = require('../models');
 
 const adminRoleController = {};
 
@@ -56,6 +56,125 @@ adminRoleController.deleteRoleById = async(req, res) => {
     )
 };
 }
+
+// adminRoleController.newUserRole = async(req, res) => {
+//     try {
+//        const { role_id, user_id } = req.body;
+
+//        const newUserRole = {
+//         user_id,
+//         role_id
+//        }
+
+//        const userRole = await User.create(newUserRole)
+//        return res.json(
+//         {
+//             success: true,
+//             message: 'Registered role successfully',
+//             userRole: userRole
+//         }
+//     )
+//     } catch (error) {
+//         return res.status(500).json(
+//             {
+//                 success: false,
+//                 message: 'Something went wrong',
+//                 error_message: error.message
+//             }
+//         )
+//     };
+//     }
+
+adminRoleController.newUserRole = async(req, res) => {
+    try {
+        const { role_id } = req.body;
+        const userId = req.params.id;
+
+        const updateRole = await User.update(
+            {
+                role_id
+            },
+            {
+                where:{
+                    id: userId
+                }
+            }
+        );
+
+        if(!updateRole){
+            return res.send(
+                {
+                success: false,
+                message: 'Can´t update user profile',
+                error_message: error.message
+                }
+            )
+        }
+        return res.send(
+            {
+            success: true,
+            message: 'Update user profile successfully',
+            updateRole: updateRole
+            }
+        )
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: false,
+                message: 'Something went wrong',
+                error_message: error.message
+            }
+        )
+    }
+};
+
+// userController.updateProfile = async(req, res) => {
+//     try {
+//         const { name, surname, email, phone, password } = req.body;
+//         const userId = req.userId;
+//         const encryptedPassword = bcrypt.hashSync(password, 10);
+
+//         const updateProfile = await User.update(
+//             {
+//                 name: name,
+//                 surname: surname,
+//                 email: email,
+//                 phone: phone,
+//                 password: encryptedPassword
+//             },
+//             {
+//                 where:{
+//                     id: userId
+//                 }
+//             }
+//         );
+
+//         if(!updateProfile){
+//             return res.send(
+//                 {
+//                 success: false,
+//                 message: 'Can´t update user profile',
+//                 error_message: error.message
+//                 }
+//             )
+//         }
+//         return res.send(
+//             {
+//             success: true,
+//             message: 'Update user profile successfully',
+//             updateProfile: updateProfile
+//             }
+//         )
+//     } catch (error) {
+//         return res.status(500).json(
+//             {
+//                 success: false,
+//                 message: 'Something went wrong',
+//                 error_message: error.message
+//             }
+//         )
+//     }
+// };
 
 
 
