@@ -1,13 +1,12 @@
 const { User, Appointment } = require('../models');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const adminController = {};
 
 adminController.updateUserByAdmin = async(req, res) => {
     try {
         const { name, surname, phone } = req.body;
-        const userId = req.params.id;
-
+        const userId = req.userId;
 
         const updateProfile = await User.update(
             {
