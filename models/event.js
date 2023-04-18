@@ -6,6 +6,9 @@ module.exports = (sequelize, DataTypes) => {
       Event.hasMany(models.Appointment, {
         foreignKey: "event_id",
       });
+      Event.belongsTo(models.Business, {
+        foreignKey: "business_id",
+      });
     }
   }
   Event.init(
@@ -15,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       place: DataTypes.STRING,
       date: DataTypes.DATE,
       hour: DataTypes.STRING,
+      business_id: DataTypes.INTEGER,
     },
     {
       sequelize,

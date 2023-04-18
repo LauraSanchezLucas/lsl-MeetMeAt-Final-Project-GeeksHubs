@@ -10,17 +10,12 @@ module.exports = (sequelize, DataTypes) => {
       Appointment.belongsTo(models.Event, {
         foreignKey: "event_id",
       });
-
-      Appointment.belongsTo(models.Business, {
-        foreignKey: "business_id",
-      });
     }
   }
   Appointment.init(
     {
       user_id: DataTypes.INTEGER,
       event_id: DataTypes.INTEGER,
-      business_id: DataTypes.INTEGER,
     },
     {
       sequelize,
