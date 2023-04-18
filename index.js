@@ -9,15 +9,12 @@ const router = require('./router');
 const app = express();
 
 app.use(express.json());
+
 app.use(router);
 
 
 
 const PORT = process.env.PORT || 4000;
-
-// app.get('/welcome', (req, res) => {
-//     return res.send("Bienvenido a mi app")
-// })
 
 
 db.then(() => {

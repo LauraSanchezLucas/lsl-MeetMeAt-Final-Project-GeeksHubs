@@ -2,6 +2,7 @@ const eventController = require('../controllers/eventController');
 const userController = require('../controllers/userController');
 const userAppointmentController = require('../controllers/userAppointmentController');
 const businessController = require('../controllers/businessController');
+
 const verifyToken= require('../middleware/verifyToken')
 
 const router = require ('express').Router();

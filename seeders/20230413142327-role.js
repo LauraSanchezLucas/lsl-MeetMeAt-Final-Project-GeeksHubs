@@ -6,19 +6,13 @@ module.exports = {
 
     await queryInterface.bulkInsert('Roles', 
     [
-      {id: 1, name: 'admin', createdAt: '2023-04-13', updatedAt: '2023-04-13'},
-      {id: 2, name: 'profesional', createdAt: '2023-04-13', updatedAt: '2023-04-13'},
-      {id: 3, name: 'public', createdAt: '2023-04-13', updatedAt: '2023-04-13'},
+      {id: 1, name: 'admin', createdAt: new Date (), updatedAt: new Date ()},
+      {id: 2, name: 'profesional', createdAt: new Date (), updatedAt: new Date ()},
+      {id: 3, name: 'public', createdAt: new Date (), updatedAt: new Date ()},
     ], 
       {});
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
   }
 };
