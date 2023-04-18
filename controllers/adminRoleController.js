@@ -2,7 +2,7 @@ const { Role, User } = require("../models");
 
 const adminRoleController = {};
 
-// Create new role.
+// CREATE NEW ROLE
 adminRoleController.newRole = async (req, res) => {
   try {
     const { name } = req.body;
@@ -38,11 +38,11 @@ adminRoleController.newRole = async (req, res) => {
   }
 };
 
-// Delete Role
+// DELETE ROLE
 adminRoleController.deleteRoleById = async (req, res) => {
   try {
     const RoleId = req.params.id;
-
+    // Check if role exist
     const existRole = await Role.findOne({
     where: {
         id: RoleId,
@@ -54,7 +54,7 @@ adminRoleController.deleteRoleById = async (req, res) => {
         message: "Role not found",
     });
     }
-
+    // delete role
     const deleteRole = await Role.destroy({
     where: {
         id: RoleId,
@@ -74,84 +74,51 @@ adminRoleController.deleteRoleById = async (req, res) => {
 }
 };
 
-// adminRoleController.newUserRole = async(req, res) => {
-//     try {
-//        const { role_id, user_id } = req.body;
-
-//        const newUserRole = {
-//         user_id,
-//         role_id
-//        }
-
-//        const userRole = await User.create(newUserRole)
-//        return res.json(
-//         {
-//             success: true,
-//             message: 'Registered role successfully',
-//             userRole: userRole
-//         }
-//     )
-//     } catch (error) {
-//         return res.status(500).json(
-//             {
-//                 success: false,
-//                 message: 'Something went wrong',
-//                 error_message: error.message
-//             }
-//         )
-//     };
-//     }
-
+// ALLOCATE ROLE TO USER
 adminRoleController.newUserRole = async (req, res) => {
-  try {
+try {
     const { role_id } = req.body;
     const userId = req.params.id;
-
     const updateRole = await User.update(
-      {
+    {
         role_id,
-      },
-      {
+    },
+    {
         where: {
-          id: userId,
+        id: userId,
         },
-      }
+    }
     );
-
     if (!updateRole) {
-      return res.send({
+    return res.send({
         success: false,
-        message: "Can´t update user profile",
+        message: 'Can´t update user profile',
         error_message: error.message,
-      });
+    });
     }
     return res.send({
-      success: true,
-      message: "Update user profile successfully",
-      updateRole: updateRole,
+        success: true,
+        message: 'Update user profile successfully',
+        updateRole: updateRole,
     });
-  } catch (error) {
+} catch (error) {
     return res.status(500).json({
-      success: false,
-      message: "Something went wrong",
-      error_message: error.message,
+        success: false,
+        message: 'Something went wrong',
+        error_message: error.message,
     });
-  }
+}
 };
 
-// userController.updateProfile = async(req, res) => {
+// UPDATE ROLE
+// adminRoleController.updateRole = async(req, res) => {
 //     try {
-//         const { name, surname, email, phone, password } = req.body;
+//         const { name } = req.body;
 //         const userId = req.userId;
-//         const encryptedPassword = bcrypt.hashSync(password, 10);
 
-//         const updateProfile = await User.update(
+//         const updateRole = await User.update(
 //             {
 //                 name: name,
-//                 surname: surname,
-//                 email: email,
-//                 phone: phone,
-//                 password: encryptedPassword
 //             },
 //             {
 //                 where:{
@@ -160,11 +127,11 @@ adminRoleController.newUserRole = async (req, res) => {
 //             }
 //         );
 
-//         if(!updateProfile){
+//         if(!updateRole){
 //             return res.send(
 //                 {
 //                 success: false,
-//                 message: 'Can´t update user profile',
+//                 message: 'Can´t update Role',
 //                 error_message: error.message
 //                 }
 //             )
@@ -172,8 +139,8 @@ adminRoleController.newUserRole = async (req, res) => {
 //         return res.send(
 //             {
 //             success: true,
-//             message: 'Update user profile successfully',
-//             updateProfile: updateProfile
+//             message: 'Update role successfully',
+//             updateRole: updateRole
 //             }
 //         )
 //     } catch (error) {
