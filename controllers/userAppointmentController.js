@@ -1,4 +1,4 @@
-const { Appointment, Business, User, Event } = require("../models");
+const { Appointment, Event } = require("../models");
 
 const userAppointmentController = {};
 
@@ -88,8 +88,10 @@ try {
 };
 // DELETE APPOINTMENT BY ID
 userAppointmentController.deleteAppointmentById = async (req, res) => {
-  try {
+try {
     const appointment = req.params.id;
+
+    // Check appointment exist
     const deleteAppointment = await Appointment.findOne({
     where: {
         user_id: req.userId,

@@ -12,7 +12,7 @@ router.get('/profile', verifyToken, userController.profile);
 router.put('/update/profile', verifyToken, userController.updateProfile);
 
 // USER - EVENTS
-router.get('/allevents', eventController.getAllEvents);
+router.get('/all/events', eventController.getAllEvents);
 
 // USER - APPOINTMENTS
 router.post('/create/appointment', verifyToken, userAppointmentController.createAppointment);
