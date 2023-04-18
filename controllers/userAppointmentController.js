@@ -5,29 +5,44 @@ const userAppointmentController = {};
 // CREATE APPOINTMENT TO EVENT
 userAppointmentController.createAppointment = async (req, res) => {
 try {
-    const { user_id, event_id, business_id } = req.body;
+    const { event_id } = req.body;
     const userId = req.userId;
+
+    // check if event already exist
+    const existEvent = await Event.findOne({
+        where:{
+            id: event_id
+        }
+    })
+    if (!existEvent) {
+        return res.status(400).json({
+            success: true,
+            message: 'This event not found',
+        });
+    }
+    // check if user have this event already
     const existAppointment = await Appointment.findOne({
-        user_id: user_id,
-        event_id: event_id,
+        where: {
+            user_id: req.userId,
+            event_id: event_id
+        },
     });
     if (existAppointment) {
     return res.status(400).json({
         success: true,
-        message: 'Appointment already exists',
+        message: 'User already has an appointment for this event',
     });
     }
-
+    // Create new appointment
     const newAppointment = {
         user_id: userId,
         event_id: event_id,
-        business_id: business_id,
     };
     const appointment = await Appointment.create(newAppointment);
 
     return res.json({
         success: true,
-        message: 'Registered appointment successfully',
+        message: 'Appointment registered successfully',
         appointment: appointment,
     });
 }catch (error) {
@@ -47,27 +62,16 @@ try {
         },
         include: [
         {
-            model: Business,
-            attributes: {
-                exclude: ['id','user_id','name','email','phone','notes','specialty_id','createdAt','updatedAt'],
-            },
-            include: {
-            model: User,
-            attributes: {
-                exclude: ['id','password','role_id','createdAt','updatedAt'],
-            },
-            },
-        },
-        {
             model: Event,
             attributes: {
-            exclude: ['id','description','createdAt','updatedAt'],
+            exclude: ['id','description','business_id','createdAt','updatedAt'],
             },
         },
         ],
         attributes: {
-        exclude: ['Id','user_id','business_id','event_id','createdAt','updatedAt'],
+        exclude: ['id','user_id','business_id','event_id','createdAt','updatedAt'],
         },
+        order: [[{model: Event}, 'date', 'ASC']]
     });
     return res.json({
         success: true,

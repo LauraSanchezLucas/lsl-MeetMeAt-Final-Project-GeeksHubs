@@ -9,13 +9,13 @@ const router = require ('express').Router();
 
 // USER
 router.get('/profile', verifyToken, userController.profile);
-router.put('/updateprofile', verifyToken, userController.updateProfile);
+router.put('/update/profile', verifyToken, userController.updateProfile);
 
 // USER - EVENTS
 router.get('/allevents', eventController.getAllEvents);
 
 // USER - APPOINTMENTS
-router.post('/createappointment', verifyToken, userAppointmentController.createAppointment);
+router.post('/create/appointment', verifyToken, userAppointmentController.createAppointment);
 router.get('/appointment', verifyToken, userAppointmentController.getAppointment);
 router.delete('/cancelappointment/:id', verifyToken, userAppointmentController.deleteAppointmentById);
 

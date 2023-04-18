@@ -22,7 +22,7 @@ module.exports = {
         required: true,
       },
       date: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         required: true,
       },
       hour: {
