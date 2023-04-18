@@ -35,18 +35,18 @@ try {
         roleId: user.role_id,
         name: user.name,
     },
-    "secreto",
-    { expiresIn: "2h" }
+    'secreto',
+    { expiresIn: '2h' }
     );
     return res.json({
         success: true,
-        message: "Login successfully",
+        message: 'Login successfully',
         token: token,
     });
 } catch (error) {
     return res.status(500).json({
         success: false,
-        message: "Somenthing went wrong",
+        message: 'Somenthing went wrong',
         error: error.message,
     });
 }
@@ -71,13 +71,13 @@ try {
     const user = await User.create(newUser);
     return res.json({
         success: true,
-        message: "Registered user successfully",
+        message: 'Registered user successfully',
         user: user,
     });
 } catch (error) {
     return res.status(500).json({
         success: true,
-        message: "Something went wrong",
+        message: 'Something went wrong',
         error_message: error.message,
     });
 }
