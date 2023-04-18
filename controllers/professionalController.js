@@ -2,7 +2,7 @@ const { User, Appointment, Event, Business } = require("../models");
 
 const professionalController = {};
 
-// See my business`s appointments
+// SEE MY BUSINESS`S APPOINTMENTS
 professionalController.getAppointmentProfessional = async (req, res) => {
 try {
     const userAppointment = await Appointment.findAll({
@@ -39,7 +39,7 @@ try {
 }
 };
 
-// find all users without profesionals
+// FIND ALL USERS WITHOUT PROFESIONALS.
 professionalController.findAllUsersProfesional = async (req, res) => {
 try {
     const user = await User.findAll({

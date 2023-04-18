@@ -2,7 +2,7 @@ const { Business, User, Specialty } = require("../models");
 
 const businessController = {};
 
-// Get all business
+// GET ALL BUSINESS.
 businessController.getAllBusiness = async (req, res) => {
 try {
     const business = await Business.findAll({
