@@ -22,7 +22,7 @@ router.get('/getappointment', verifyToken, isAdmin, adminAppointmentController.g
 router.post('/newrole', verifyToken, isAdmin, adminRoleController.newRole);
 router.delete('/deleterole/:id', verifyToken, isAdmin, adminRoleController.deleteRoleById);
 router.post('/newuserrole/:id', verifyToken, isAdmin, adminRoleController.newUserRole);
-// router.put('/updateuserrole/:id', verifyToken, isAdmin, adminRoleController.updateRole);
+router.put('/updateuserrole/:id', verifyToken, isAdmin, adminRoleController.updateRole);
 
 
 module.exports = router;
