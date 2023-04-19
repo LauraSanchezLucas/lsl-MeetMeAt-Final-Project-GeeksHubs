@@ -99,11 +99,17 @@ try {
     });
     }
     // Find and delete all appointments from that user
-    await Appointment.destroy({
-    where: {
-        user_id: user,
-    },
-    });
+    const existRole = await Role.findOne({
+        where: {
+            id: RoleId,
+        },
+        });
+        if (!existRole) {
+        return res.status(400).json({
+            success: true,
+            message: "Role not found",
+        });
+        }
     const deleteUser = await User.destroy({
     where: {
         id: user,

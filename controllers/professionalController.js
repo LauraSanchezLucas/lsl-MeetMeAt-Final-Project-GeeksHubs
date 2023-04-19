@@ -5,7 +5,7 @@ const professionalController = {};
 // SEE MY BUSINESS`S APPOINTMENTS
 professionalController.getAppointmentProfessional = async (req, res) => {
 try {
-    const businessId = req.params.businessId;
+    const businessId = req.params.id;
     const business = await Business.findByPk(businessId);
     if(!business){
         return res.status(400).json({
@@ -14,39 +14,62 @@ try {
                 }); 
     }
     const events = await Event.findAll({
+        where: {
+            business_id: businessId
+        },
         include: [{
             model: Appointment,
-            include: [{
-                model: Event,
-                include:[{
-                    model: Business, 
-                    where:{
-                    id: businessId
-                }
-                }]
-            }]
+            // include: [{
+            //     model: Event,
+            //     include:[{
+            //         model: Business, 
+            //         where:{
+            //         id: businessId
+            //     }
+            //     }]
+            // }]
         }]
     });
-//     const userAppointment = await Appointment.findAll({
-//     include: [
-//         {
-//         model: User,
-//         attributes: {
-//             exclude: ['id','password','role_id','createdAt','updatedAt'],
-//         },
-//         },
-//         {
-//         model: Event,
-//         attributes: {
-//             exclude: ['id','createdAt','updatedAt'],
-//         },
-//         },
-//     ],
 
-//     attributes: {
-//         exclude: ['id','user_id','event_id','business_id','createdAt','updatedAt'],
-//     },
-//     });
+    // const userCitas = await Appointment.findAll(
+    //     {
+    //         where: {
+    //             user_id: req.userId
+    //         },
+    //         include: [
+    //             Service,
+    //             {
+    //                 model: User,
+    //                 attributes: {
+    //                     exclude: ["password", "role_id", "createdAt", "updatedAt"]
+    //                 },
+    //             },
+    //         ],
+    //         attributes: {
+    //             exclude: ["user_id", "doctor_id", "service_id"]
+    //         }
+    //     }
+    // )
+    // const userAppointment = await Appointment.findAll({
+    // include: [
+    //     {
+    //     model: User,
+    //     attributes: {
+    //         exclude: ['id','password','role_id','createdAt','updatedAt'],
+    //     },
+    //     },
+    //     {
+    //     model: Event,
+    //     attributes: {
+    //         exclude: ['id','createdAt','updatedAt'],
+    //     },
+    //     },
+    // ],
+
+    // attributes: {
+    //     exclude: ['id','user_id','event_id','business_id','createdAt','updatedAt'],
+    // },
+    // });
     return res.status(200).json({
         success: true,
         message: 'Access appointments successfully',
@@ -70,6 +93,7 @@ try {
         exclude: ['id','password','role_id','createdAt','updatedAt'],
     },
     });
+
     return res.send({
         success: true,
         message: 'Access profiles successfully',

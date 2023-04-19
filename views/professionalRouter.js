@@ -6,7 +6,7 @@ const isProfessional= require('../middleware/isProfessional');
 const router = require ('express').Router();
 
 // PROFESSIONAL - APPOINTMENT
-router.get('/createappointmentbyprofess', verifyToken, isProfessional, professionalController.getAppointmentProfessional);
+router.get('/getappointmentbyprofess/:id', verifyToken, isProfessional, professionalController.getAppointmentProfessional);
 
 // PROFESSIONAL - USER
 router.get('/getuserbyprofess', verifyToken, isProfessional, professionalController.findAllUsersProfesional);
