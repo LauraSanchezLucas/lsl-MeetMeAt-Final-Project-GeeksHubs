@@ -7,7 +7,7 @@ eventController.getAllEvents = async (req, res) => {
 try {
     const event = await Event.findAll({
     attributes: {
-        exclude: ['id', 'business_id', 'createdAt', 'updatedAt'],
+        exclude: ['business_id', 'createdAt', 'updatedAt'],
     },
     });
     return res.json({
