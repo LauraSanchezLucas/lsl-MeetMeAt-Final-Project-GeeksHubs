@@ -159,5 +159,36 @@ adminRoleController.updateRole = async (req, res) => {
     });
   }
 };
+// SEE ALL ROLES.
+adminRoleController.getAllRoles = async (req, res) => {
+  try {
+    const role = await Role.findAll({
+        include: [
+            {
+                model: User,
+                attributes: {
+                    exlude: ["createdAt", "updatedAt"],
+                },
+            },
+        ],
+        attributes: {
+            exclude: ["createdAt","updatedAt"],
+        },
+    });
+    
+
+      return res.json({
+          success: true,
+          message: "Access successfully",
+          role: role,
+      });
+  } catch (error) {
+      return res.status(500).json({
+          success: false,
+          message: "Something went wrong",
+          error_message: error.message,
+      });
+  }
+};
 
 module.exports = adminRoleController;
