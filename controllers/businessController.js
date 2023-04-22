@@ -13,13 +13,16 @@ businessController.getAllBusiness = async (req, res) => {
                         exlude: ["id", "createdAt", "updatedAt"],
                     },
                 },
+                {
+                    model: User,
+                    attributes: {
+                        exlude: ["id", "surname", "email", "phone", "password", "createdAt", "updatedAt"],
+                    },
+                },
             ],
             attributes: {
                 exclude: [
                     "id",
-                    "email",
-                    "phone",
-                    "notes",
                     "user_id",
                     "specialty_id",
                     "createdAt",
@@ -102,9 +105,6 @@ businessController.createBusiness = async (req, res) => {
         const newBusiness = {
             user_id: user_id,
             specialty_id: specialty_id,
-            name: name,
-            email: email,
-            phone: phone,
             notes: notes,
             role_id: 2,
         };

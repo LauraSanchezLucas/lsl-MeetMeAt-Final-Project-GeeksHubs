@@ -15,7 +15,6 @@ module.exports = {
       },
       surname: {
         type: Sequelize.STRING,
-        require: true,
       },
       email: {
         type: Sequelize.STRING,

@@ -9,20 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
-        required: true,
-        unique: true,
-      },
-      email: {
-        type: Sequelize.STRING,
-        required: true,
-        unique: true,
-      },
-      phone: {
-        type: Sequelize.STRING,
-        required: true,
-      },
       notes: {
         type: Sequelize.STRING,
       },
