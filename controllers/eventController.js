@@ -1,4 +1,5 @@
-const { Event } = require("../models");
+const { Event, Business } = require("../models");
+
 
 const eventController = {};
 
@@ -60,7 +61,7 @@ eventController.deleteEventById = async (req, res) => {
     // CREATE EVENT.
     eventController.createEvent = async (req, res) => {
     try {
-        const { name, description, place, date, hour } = req.body;
+        const { name, description, place, date, hour, business_id } = req.body;
         const existEvent = await Event.findOne({
         where: {
             name: name,
@@ -72,6 +73,17 @@ eventController.deleteEventById = async (req, res) => {
             message: 'Event already exists',
         });
         }
+        const existBusiness = await Business.findOne({
+            where: {
+                id: business_id,
+            },
+            });
+            if (!existBusiness) {
+            return res.status(400).json({
+                success: true,
+                message: 'Business not found',
+            });
+            }
     
         const newEvent = {
             name: name,
@@ -79,6 +91,7 @@ eventController.deleteEventById = async (req, res) => {
             place: place,
             date: date,
             hour: hour,
+            id: business_id
         };
         const event = await Event.create(newEvent);
     
