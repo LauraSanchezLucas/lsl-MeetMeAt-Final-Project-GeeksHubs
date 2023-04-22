@@ -88,12 +88,12 @@ try {
         {
         model: Event,
         attributes: {
-            exclude: ['id','password','role_id','business_id','createdAt','updatedAt'],
+            exclude: ['id','password','role_id','createdAt','updatedAt'],
         },
         },
     ],
     attributes: {
-        exclude: ['id','user_id','event_id','business_id','createdAt','updatedAt'],
+        exclude: ['id','createdAt','updatedAt'],
     },
     });
     return res.json({

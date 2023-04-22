@@ -106,7 +106,7 @@ businessController.createBusiness = async (req, res) => {
             user_id: user_id,
             specialty_id: specialty_id,
             notes: notes,
-            role_id: 2,
+            role_id: role_id,
         };
         const business = await Business.create(newBusiness);
 
