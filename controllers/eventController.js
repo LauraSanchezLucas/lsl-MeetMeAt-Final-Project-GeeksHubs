@@ -1,4 +1,4 @@
-const { Event, Business } = require("../models");
+const { Event, Business, User } = require("../models");
 
 
 const eventController = {};
@@ -59,7 +59,7 @@ eventController.deleteEventById = async (req, res) => {
     };
     
     // CREATE EVENT.
-    eventController.createEvent = async (req, res) => {
+   eventController.createEvent = async (req, res) => {
     try {
         const { name, description, place, date, hour, business_id } = req.body;
         const existEvent = await Event.findOne({
@@ -108,5 +108,65 @@ eventController.deleteEventById = async (req, res) => {
         });
     }
     };
+
+
+    // CREATE EVENT BY PROFESIONAL
+
+    eventController.createEventProfessional = async (req, res) => {
+        try {
+            const { name, description, place, date, hour } = req.body;
+            const business = await Business.findOne({
+            where: {
+                user_id: req.userId,
+            },
+            include:{
+                model: User,
+                attributes:[ 'name'],
+
+            }
+            });
+            if (!business) {
+            return res.status(400).json({
+                success: true,
+                message: 'Business not found',
+            });
+            }
+            const existEvent = await Event.findOne({
+                where: {
+                    name: name,
+                    business_id: business.id,
+                },
+                });
+                if (existEvent) {
+                return res.status(400).json({
+                    success: true,
+                    message: 'Event already exist',
+                });
+                }
+        
+            const newEvent = {
+                name: name,
+                description: description,
+                place: place,
+                date: date,
+                hour: hour,
+                business_id:business.id
+            };
+            
+            const event = await Event.create(newEvent);
+        
+            return res.json({
+                success: true,
+                message: 'Event created successfully',
+                event: event,
+            });
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: 'Something went wrong',
+                error_message: error.message,
+            });
+        }
+        };
 
 module.exports = eventController;

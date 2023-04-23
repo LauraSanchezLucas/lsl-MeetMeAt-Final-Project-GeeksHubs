@@ -1,4 +1,5 @@
 const professionalController = require('../controllers/professionalController');
+const eventController = require('../controllers/eventController');
 
 const verifyToken= require('../middleware/verifyToken');
 const isProfessional= require('../middleware/isProfessional');
@@ -10,5 +11,8 @@ router.get('/getappointmentbyprofess/:id', verifyToken, isProfessional, professi
 
 // PROFESSIONAL - USER
 router.get('/getuserbyprofess', verifyToken, isProfessional, professionalController.findAllUsersProfesional);
+
+// PROFESSIONAL -EVENT
+router.post('/neweventprofessional', verifyToken, isProfessional, eventController.createEventProfessional);
 
 module.exports = router;
