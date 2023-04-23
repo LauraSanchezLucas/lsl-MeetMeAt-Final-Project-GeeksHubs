@@ -1,4 +1,3 @@
-const { where } = require("sequelize");
 const { User, Appointment, Event, Business } = require("../models");
 
 const professionalController = {};
@@ -20,19 +19,24 @@ professionalController.getAppointmentProfessional = async (req, res) => {
 //         },
 //         include: [{
 //             model: Appointment,
-//             // include: [{
-//             //     model: Event,
-//             //     include:[{
-//             //         model: Business, 
-//             //         where:{
-//             //         id: businessId
-//             //     }
-//             //     }]
-//             // }]
+//             include: [{
+//                 model: Event,
+//                 include:[{
+//                     model: Business, 
+//                     where:{
+//                     id: businessId
+//                 }
+//                 }]
+//             }]
 //         }]
 //     });
 
-    
+//     const eventsWithAppoint =[];
+//     events.forEach(event => {
+//         if(event.Appointments.length > 0){
+//             eventsWithAppoint.push(event)
+//         }
+//     })
 //     return res.status(200).json({
 //         success: true,
 //         message: 'Access appointments successfully',
@@ -49,6 +53,8 @@ professionalController.getAppointmentProfessional = async (req, res) => {
 
 try {
     const userId = req.userId;
+
+    
     const business = await Business.findOne({
         where: {user_id: userId},
         include:{
@@ -58,7 +64,8 @@ try {
                 include:{
                     model:User
                 }
-                }
+                },
+
             }
         }
 
@@ -84,6 +91,9 @@ try {
     });
 }
 };
+
+
+
 // FIND ALL USERS WITHOUT PROFESIONALS.
 professionalController.findAllUsersProfesional = async (req, res) => {
 try {

@@ -12,6 +12,7 @@ const router = require ('express').Router();
 router.put('/updateuserprofile/:id', verifyToken, isAdmin, adminController.updateUserByAdmin);
 router.get('/allusers', verifyToken, isAdmin, adminController.findAllUsersAdmin);
 router.delete('/cancelluser/:id', verifyToken, isAdmin, adminController.deleteUserByAdmin);
+router.post('/newuseradmin', verifyToken, isAdmin, adminController.newUserByAdmin);
 
 // ADMIN - APPOINTMENTS
 router.post('/newappointment', verifyToken, isAdmin, adminAppointmentController.createAppointmentAdmin);

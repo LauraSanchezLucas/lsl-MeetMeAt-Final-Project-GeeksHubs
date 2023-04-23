@@ -1,5 +1,6 @@
 const { User, Appointment } = require("../models");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const adminController = {};
 
@@ -82,51 +83,71 @@ try {
 };
 // DELETE USER BY ADMIN
 adminController.deleteUserByAdmin = async (req, res) => {
-try {
-    const user = req.params.id;
-    // Check if user exist
-    const deleteUsers = await User.findOne({
-    where: {
-        id: user,
-    },
-    });
-
-    if (!deleteUsers) {
-    return res.json({
-        success: true,
-        message: 'User not found',
-        user: deleteUsers,
-    });
-    }
-    // Find and delete all appointments from that user
-    const existRole = await Role.findOne({
+    try {
+        const user = req.params.id;
+        // Check if user exist
+        const deleteUsers = await User.findOne({
         where: {
-            id: RoleId,
+            id: user,
         },
         });
-        if (!existRole) {
-        return res.status(400).json({
+    
+        if (!deleteUsers) {
+        return res.json({
             success: true,
-            message: "Role not found",
+            message: 'User not found',
+            user: deleteUsers,
         });
         }
-    const deleteUser = await User.destroy({
-    where: {
-        id: user,
-    },
-    });
-    return res.send({
-        success: true,
-        message: 'User deleted successfully',
-        deleteUser: deleteUser,
-    });
-} catch (error) {
-    return res.status(500).json({
-        success: false,
-        message: 'Something went wrong',
-        error_message: error.message,
-    });
-}
-};
+        const deleteUser = await User.destroy({
+        where: {
+            id: user,
+        },
+        });
+        return res.send({
+            success: true,
+            message: 'User deleted successfully',
+            deleteUser: deleteUser,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong',
+            error_message: error.message,
+        });
+    }
+    };
+
+// CREATE USER BY ADMIN
+adminController.newUserByAdmin = async (req, res) => {
+    try {
+
+        const { name, surname, email, phone, password, role_id } = req.body;
+
+        const encryptedPassword = bcrypt.hashSync(password, 10);
+    
+        const newUser = {
+            name: name,
+            surname: surname,
+            email: email,
+            phone: phone,
+            password: encryptedPassword,
+            role_id: role_id,
+        };
+    
+        const user = await User.create(newUser);
+        return res.json({
+            success: true,
+            message: 'Registered user successfully',
+            user: user,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: true,
+            message: 'Something went wrong',
+            error_message: error.message,
+        });
+    }
+    };  
 
 module.exports = adminController;
