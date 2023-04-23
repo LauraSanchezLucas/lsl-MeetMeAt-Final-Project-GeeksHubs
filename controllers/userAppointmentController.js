@@ -69,7 +69,7 @@ try {
         },
         ],
         attributes: {
-        exclude: ['id','user_id','business_id','event_id','createdAt','updatedAt'],
+        exclude: ['user_id','business_id','event_id','createdAt','updatedAt'],
         },
         order: [[{model: Event}, 'date', 'ASC']]
     });

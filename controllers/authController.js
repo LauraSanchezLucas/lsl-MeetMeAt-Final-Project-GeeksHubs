@@ -32,6 +32,8 @@ try {
     {
         userId: user.id,
         email: user.email,
+        surname: user.surname,
+        phone: user.phone,
         roleId: user.role_id,
         name: user.name,
     },
