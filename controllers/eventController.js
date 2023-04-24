@@ -24,7 +24,7 @@ try {
     });
 }
 };
-// DELETE EVENT
+// DELETE EVENT 
 eventController.deleteEventById = async (req, res) => {
     try {
         const eventId = req.params.id;
@@ -201,5 +201,42 @@ eventController.deleteEventById = async (req, res) => {
         });
     }
     };
+
+    // DELETE EVENT BY PROFESSIONAL
+    eventController.deleteEventByProfessionalById = async (req, res) => {
+        try {
+            const eventId = req.params.id;
+            const businessId = req.userId;
+            const existEvent = await Event.findOne({
+                where: {
+                    id: eventId,
+                    business_id: businessId
+                },
+                });
+                if (!existEvent) {
+                return res.status(400).json({
+                    success: true,
+                    message: 'Event not found',
+                });
+                }
+            const deleteEvent = await Event.destroy({
+            where: {
+                id: eventId,
+                business_id: businessId
+            },
+            });
+            return res.json({
+                success: true,
+                message: 'Event deleted',
+                deleteEvent: deleteEvent,
+            });
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: 'Something went wrong',
+                error_message: error.message,
+            });
+        }
+        };
 
 module.exports = eventController;

@@ -16,5 +16,6 @@ router.post('/newevent', verifyToken, isAdmin, eventController.createEvent);
 // PROFESSIONAL - EVENT
 
 router.get('/all/events/professional',verifyToken, isProfessional, eventController.getAllEventsProfessional);
+router.delete('/deleteeventprofessi/:id', verifyToken, isProfessional, eventController.deleteEventByProfessionalById);
 
 module.exports = router;
