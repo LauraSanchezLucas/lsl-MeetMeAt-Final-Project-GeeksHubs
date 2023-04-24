@@ -18,8 +18,6 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
       specialty_id: {
         type: Sequelize.INTEGER,

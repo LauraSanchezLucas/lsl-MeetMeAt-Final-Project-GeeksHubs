@@ -169,4 +169,37 @@ eventController.deleteEventById = async (req, res) => {
         }
         };
 
+    // GET ALL EVENTS BY PROFESSIONAL.
+    eventController.getAllEventsProfessional = async (req, res) => {
+    try {
+        const userId = req.userId
+        
+        const business = await Business.findOne({
+            where:{
+                user_id: userId
+            }
+            });
+
+
+        const events = await Event.findAll({
+        where:{
+            business_id: business.id},
+            attributes:{
+                exclude:['business_id', 'createdAt', 'updatedAt'],
+            }
+        });
+        return res.json({
+            success: true,
+            message: 'Access successfully',
+            event: events,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong',
+            error_message: error.message,
+        });
+    }
+    };
+
 module.exports = eventController;
