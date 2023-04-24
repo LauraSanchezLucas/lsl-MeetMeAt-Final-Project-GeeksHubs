@@ -185,7 +185,7 @@ eventController.deleteEventById = async (req, res) => {
         where:{
             business_id: business.id},
             attributes:{
-                exclude:['business_id', 'createdAt', 'updatedAt'],
+                exclude:['business_id','createdAt', 'updatedAt'],
             }
         });
         return res.json({
@@ -206,13 +206,26 @@ eventController.deleteEventById = async (req, res) => {
     eventController.deleteEventByProfessionalById = async (req, res) => {
         try {
             const eventId = req.params.id;
-            const businessId = req.userId;
+            const userId = req.userId;
+            
             const existEvent = await Event.findOne({
                 where: {
                     id: eventId,
-                    business_id: businessId
                 },
-                });
+                include:[
+                    {model: Business,
+                        where:{
+                            user_id: userId,
+                        },
+                        // include:[
+                        //     {model: User,
+                        //     attributes:{
+                        //         exclude:['phone','password','email','createdAt','updatedAt']
+                        //     }}
+                        // ]
+                    }
+                ]
+                },);
                 if (!existEvent) {
                 return res.status(400).json({
                     success: true,
@@ -222,8 +235,22 @@ eventController.deleteEventById = async (req, res) => {
             const deleteEvent = await Event.destroy({
             where: {
                 id: eventId,
-                business_id: businessId
-            },
+            }, include:[
+                {
+                    model: Business,
+                    where:{
+                        user_id: userId,
+                    },
+                    // include:[
+                    //     {
+                    //         model: User,
+                    //         attributes:{
+                    //             exclude:['phone','password','email','createdAt','updatedAt']
+                    //         }
+                    //     }
+                    // ]
+                }
+            ]
             });
             return res.json({
                 success: true,
