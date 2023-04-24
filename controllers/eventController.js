@@ -91,7 +91,7 @@ eventController.deleteEventById = async (req, res) => {
             place: place,
             date: date,
             hour: hour,
-            id: business_id
+            business_id: business_id
         };
         const event = await Event.create(newEvent);
     

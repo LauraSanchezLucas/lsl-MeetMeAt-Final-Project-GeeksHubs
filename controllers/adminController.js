@@ -65,7 +65,7 @@ adminController.findAllUsersAdmin = async (req, res) => {
 try {
     const user = await User.findAll({
     attributes: {
-        exclude: ['id', 'password', 'createdAt', 'updatedAt'],
+        exclude: ['password', 'createdAt', 'updatedAt'],
     },
     });
     return res.send({

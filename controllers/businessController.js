@@ -22,7 +22,6 @@ businessController.getAllBusiness = async (req, res) => {
             ],
             attributes: {
                 exclude: [
-                    "id",
                     "user_id",
                     "specialty_id",
                     "createdAt",
