@@ -1,7 +1,7 @@
 'use strict';
 const bcrypt = require('bcrypt');
 
-const password = '123456';
+const password = '1234567A';
 const encryptedPassword = bcrypt.hashSync(password,10);
 
 /** @type {import('sequelize-cli').Migration} */

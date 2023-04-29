@@ -58,7 +58,12 @@ try {
 authController.register = async (req, res) => {
 try {
     const { name, surname, email, phone, password } = req.body;
-
+    if(!name || !surname || !email || !phone || !password){
+        return res.status(400).json({
+            success: false,
+            message: 'All fields are required'
+        });
+    }
     const encryptedPassword = bcrypt.hashSync(password, 10);
 
     const newUser = {

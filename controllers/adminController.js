@@ -7,7 +7,7 @@ const adminController = {};
 // UPDATE USER BY ADMIN
 adminController.updateUserByAdmin = async (req, res) => {
 try {
-    const { name, surname, phone, email, password } = req.body;
+    const { name, surname, phone, email, password, role_id } = req.body;
     const userId = req.params.id;
     const encryptedPassword = bcrypt.hashSync(password, 10);
 
@@ -30,7 +30,8 @@ try {
         surname: surname,
         phone: phone,
         email: email,
-        password: encryptedPassword
+        password: encryptedPassword,
+        role_id: role_id
     },
     {
         where: {
@@ -149,5 +150,54 @@ adminController.newUserByAdmin = async (req, res) => {
         });
     }
     };  
+    // UPDATE EVENT BY ADMIN
+adminController.updateEventAdmin = async (req, res) => {
+    try {
+      const { name, description, place, date, hour, business_id } = req.body;
+      const roleId = req.params.id;
+    // Check if exist role
+      const existRole = await Role.findOne({
+        where: {
+          id: roleId,
+        },
+      });
+      if (!existRole) {
+        return res.status(400).json({
+          success: true,
+          message: "Role not found",
+        });
+      }
+      // Update role
+      const updateRole = await Role.update(
+        {
+          name: name,
+        },
+        {
+          where: {
+            id: roleId,
+          },
+        }
+      );
+  
+      if (!updateRole) {
+        return res.send({
+          success: false,
+          message: "Can´t update Role",
+          error_message: error.message,
+        });
+      }
+      return res.send({
+        success: true,
+        message: "Update role successfully",
+        updateRole: updateRole,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+        error_message: error.message,
+      });
+    }
+  };
 
 module.exports = adminController;

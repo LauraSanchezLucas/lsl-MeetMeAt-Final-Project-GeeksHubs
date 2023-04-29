@@ -82,7 +82,7 @@ try {
         {
         model: User,
         attributes: {
-            exclude: ['id','password','role_id','createdAt','updatedAt'],
+            exclude: ['password','role_id','createdAt','updatedAt'],
         },
         },
         {
@@ -93,7 +93,7 @@ try {
         },
     ],
     attributes: {
-        exclude: ['id','createdAt','updatedAt'],
+        exclude: ['createdAt','updatedAt'],
     },
     });
     return res.json({

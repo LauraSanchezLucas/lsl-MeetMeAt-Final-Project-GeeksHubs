@@ -10,25 +10,31 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING,
-        require: true,
+        // require: true,
       },
       surname: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       email: {
+        allowNull: false,
         type: Sequelize.STRING,
         unique: true,
-        require: true,
+        // require: true,
       },
       phone: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       password: {
+        allowNull: false,
         type: Sequelize.STRING,
-        require: true,
+        // require: true,
       },
       role_id: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: 'Roles',
