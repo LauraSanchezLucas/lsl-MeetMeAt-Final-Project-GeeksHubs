@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Event.init(
     {
+      image: DataTypes.STRING,
       name: DataTypes.STRING,
       description: DataTypes.STRING,
       place: DataTypes.STRING,

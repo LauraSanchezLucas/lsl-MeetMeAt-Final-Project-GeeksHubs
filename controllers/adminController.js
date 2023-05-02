@@ -1,6 +1,7 @@
-const { User, Appointment } = require("../models");
+const { User, Role } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { Op } = require("sequelize");
 
 const adminController = {};
 
@@ -68,6 +69,14 @@ try {
     attributes: {
         exclude: ['password', 'createdAt', 'updatedAt'],
     },
+    include:[{
+      model: Role,
+      where: {
+        name:{
+          [Op.not]: 'admin'
+        }
+      }
+    }]
     });
     return res.send({
         success: true,

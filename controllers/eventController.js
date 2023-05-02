@@ -61,7 +61,7 @@ eventController.deleteEventById = async (req, res) => {
     // CREATE EVENT.
    eventController.createEvent = async (req, res) => {
     try {
-        const { name, description, place, date, hour, business_id } = req.body;
+        const { image, name, description, place, date, hour, business_id } = req.body;
         const existEvent = await Event.findOne({
         where: {
             name: name,
@@ -86,6 +86,7 @@ eventController.deleteEventById = async (req, res) => {
             }
     
         const newEvent = {
+            image: image,
             name: name,
             description: description,
             place: place,
@@ -114,7 +115,7 @@ eventController.deleteEventById = async (req, res) => {
 
     eventController.createEventProfessional = async (req, res) => {
         try {
-            const { name, description, place, date, hour } = req.body;
+            const { image, name, description, place, date, hour } = req.body;
             const business = await Business.findOne({
             where: {
                 user_id: req.userId,
@@ -145,6 +146,7 @@ eventController.deleteEventById = async (req, res) => {
                 }
         
             const newEvent = {
+                image: image,
                 name: name,
                 description: description,
                 place: place,
