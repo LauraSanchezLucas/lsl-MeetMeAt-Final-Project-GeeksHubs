@@ -12,7 +12,6 @@ module.exports = {
       name: {
         allowNull: false,
         type: Sequelize.STRING,
-        // require: true,
       },
       surname: {
         allowNull: false,
@@ -22,7 +21,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
         unique: true,
-        // require: true,
       },
       phone: {
         allowNull: false,
@@ -31,7 +29,6 @@ module.exports = {
       password: {
         allowNull: false,
         type: Sequelize.STRING,
-        // require: true,
       },
       role_id: {
         allowNull: false,

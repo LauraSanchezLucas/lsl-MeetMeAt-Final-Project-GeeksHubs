@@ -1,9 +1,9 @@
 const businessController = require('../controllers/businessController');
 
-const verifyToken= require('../middleware/verifyToken');
-const isAdmin= require('../middleware/isAdmin');
+const verifyToken = require('../middleware/verifyToken');
+const isAdmin = require('../middleware/isAdmin');
 
-const router = require ('express').Router();
+const router = require('express').Router();
 
 
 // USER - BUSINESS

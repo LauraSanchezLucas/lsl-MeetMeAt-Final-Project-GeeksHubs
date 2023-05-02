@@ -1,6 +1,4 @@
 const { Specialty } = require("../models");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 const specialtyController = {};
 
@@ -12,6 +10,7 @@ specialtyController.findAllSpecialty = async (req, res) => {
             exclude: ['createdAt', 'updatedAt'],
         },
         });
+        
         return res.send({
             success: true,
             message: 'Access specialty successfully',

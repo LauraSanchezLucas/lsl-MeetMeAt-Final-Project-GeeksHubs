@@ -1,12 +1,13 @@
+const { Op } = require("sequelize");
 const { Role, User } = require("../models");
 
-const adminRoleController = {};
+const roleController = {};
 
 // CREATE NEW ROLE
-adminRoleController.newRole = async (req, res) => {
+roleController.newRole = async (req, res) => {
   try {
     const { name } = req.body;
-    // find if exist
+
     const existRole = await Role.findOne({
       where: {
         name: name,
@@ -17,8 +18,7 @@ adminRoleController.newRole = async (req, res) => {
         success: true,
         message: "Role already exists",
       });
-    }
-    // Create new role
+    };
     const newRole = {
       name,
     };
@@ -39,10 +39,10 @@ adminRoleController.newRole = async (req, res) => {
 };
 
 // DELETE ROLE
-adminRoleController.deleteRoleById = async (req, res) => {
+roleController.deleteRoleById = async (req, res) => {
   try {
     const RoleId = req.params.id;
-    // Check if role exist
+
     const existRole = await Role.findOne({
       where: {
         id: RoleId,
@@ -53,13 +53,13 @@ adminRoleController.deleteRoleById = async (req, res) => {
         success: true,
         message: "Role not found",
       });
-    }
-    // delete role
+    };
     const deleteRole = await Role.destroy({
       where: {
         id: RoleId,
       },
     });
+
     return res.json({
       success: true,
       message: "Role deleted",
@@ -73,49 +73,12 @@ adminRoleController.deleteRoleById = async (req, res) => {
     });
   }
 };
-
-// ALLOCATE ROLE TO USER
-adminRoleController.newUserRole = async (req, res) => {
-  try {
-    const { role_id } = req.body;
-    const userId = req.params.id;
-    const updateRole = await User.update(
-      {
-        role_id,
-      },
-      {
-        where: {
-          id: userId,
-        },
-      }
-    );
-    if (!updateRole) {
-      return res.send({
-        success: false,
-        message: "Can´t update user profile",
-        error_message: error.message,
-      });
-    }
-    return res.send({
-      success: true,
-      message: "Update user profile successfully",
-      updateRole: updateRole,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Something went wrong",
-      error_message: error.message,
-    });
-  }
-};
-
 // UPDATE ROLE
-adminRoleController.updateRole = async (req, res) => {
+roleController.updateRole = async (req, res) => {
   try {
     const { name } = req.body;
     const roleId = req.params.id;
-  // Check if exist role
+
     const existRole = await Role.findOne({
       where: {
         id: roleId,
@@ -126,8 +89,7 @@ adminRoleController.updateRole = async (req, res) => {
         success: true,
         message: "Role not found",
       });
-    }
-    // Update role
+    };
     const updateRole = await Role.update(
       {
         name: name,
@@ -138,14 +100,14 @@ adminRoleController.updateRole = async (req, res) => {
         },
       }
     );
-
     if (!updateRole) {
       return res.send({
         success: false,
         message: "Can´t update Role",
         error_message: error.message,
       });
-    }
+    };
+
     return res.send({
       success: true,
       message: "Update role successfully",
@@ -160,35 +122,70 @@ adminRoleController.updateRole = async (req, res) => {
   }
 };
 // SEE ALL ROLES.
-adminRoleController.getAllRoles = async (req, res) => {
+roleController.getAllRoles = async (req, res) => {
   try {
     const role = await Role.findAll({
-        include: [
-            {
-                model: User,
-                attributes: {
-                    exlude: ["createdAt", "updatedAt"],
-                },
-            },
-        ],
-        attributes: {
-            exclude: ["createdAt","updatedAt"],
+      include: [
+        {
+          model: User,
+          attributes: {
+            exlude: ["createdAt", "updatedAt"],
+          },
         },
+      ],
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
     });
-    
 
-      return res.json({
-          success: true,
-          message: "Access successfully",
-          role: role,
-      });
+    return res.json({
+      success: true,
+      message: "Access successfully",
+      role: role,
+    });
   } catch (error) {
-      return res.status(500).json({
-          success: false,
-          message: "Something went wrong",
-          error_message: error.message,
-      });
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error_message: error.message,
+    });
+  }
+};
+// SEE ALL ROLES EXCLUDE ADMIN.
+roleController.getAllRolesNotAdmin = async (req, res) => {
+  try {
+    const role = await Role.findAll({
+      where: {
+        id: {
+          [Op.ne]: 1,
+        },
+      },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exlude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+    });
+
+    return res.json({
+      success: true,
+      message: "Access successfully",
+      role: role,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error_message: error.message,
+    });
   }
 };
 
-module.exports = adminRoleController;
+
+module.exports = roleController;

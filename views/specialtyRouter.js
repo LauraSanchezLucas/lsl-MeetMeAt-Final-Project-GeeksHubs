@@ -1,11 +1,11 @@
 const specialtyController = require('../controllers/specialtyController');
 
-const verifyToken= require('../middleware/verifyToken');
-const isAdmin= require('../middleware/isAdmin');
+const verifyToken = require('../middleware/verifyToken');
+const isAdmin = require('../middleware/isAdmin');
 
-const router = require ('express').Router();
+const router = require('express').Router();
 
-// PROFESSIONAL - APPOINTMENT
+// ADMIN - SPECIALTY
 router.get('/specialty', verifyToken, isAdmin, specialtyController.findAllSpecialty);
 
 module.exports = router;

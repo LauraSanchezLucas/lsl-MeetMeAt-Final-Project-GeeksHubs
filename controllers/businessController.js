@@ -21,12 +21,7 @@ businessController.getAllBusiness = async (req, res) => {
                 },
             ],
             attributes: {
-                exclude: [
-                    "user_id",
-                    "specialty_id",
-                    "createdAt",
-                    "updatedAt",
-                ],
+                exclude: ["user_id", "specialty_id", "createdAt", "updatedAt"],
             },
         });
 
@@ -43,7 +38,6 @@ businessController.getAllBusiness = async (req, res) => {
         });
     }
 };
-
 // DELETE BUSINESS
 businessController.deleteBusinessById = async (req, res) => {
     try {
@@ -54,6 +48,7 @@ businessController.deleteBusinessById = async (req, res) => {
                 id: businessId,
             },
         });
+
         return res.json({
             success: true,
             message: "Event deleted",
@@ -67,12 +62,11 @@ businessController.deleteBusinessById = async (req, res) => {
         });
     }
 };
-
 // CREATE BUSINESS
 businessController.createBusiness = async (req, res) => {
     try {
         const { user_id, specialty_id, notes } = req.body;
-        // Check if business already exist
+
         const existBusiness = await Business.findOne({
             where: {
                 user_id: user_id,
@@ -83,8 +77,7 @@ businessController.createBusiness = async (req, res) => {
                 success: true,
                 message: "Business already exists",
             });
-        }
-        // Check user is business
+        };
         const user = await User.findOne({
             where: {
                 id: user_id,
@@ -93,7 +86,6 @@ businessController.createBusiness = async (req, res) => {
                 model: Role,
             },
         });
-
         const role_id = user.Role.id;
         if (role_id !== 2) {
             return res.status(400).json({
@@ -122,4 +114,6 @@ businessController.createBusiness = async (req, res) => {
         });
     }
 };
+
+
 module.exports = businessController;
