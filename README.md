@@ -7,7 +7,7 @@
     <li><a href="#meet-me-at-app">About Meet Me At App</a></li>
     <li><a href="#stack">Stack</a></li>
     <li><a href="#diagram-bd">Diagram DB</a></li>
-    <li><a href="#local-instalation">Local installation</a></li>
+    <li><a href="#local-installation">Local installation</a></li>
     <li><a href="#how-do-we-do-it">How do we do it</a></li>
     <li><a href="#project-structure">Project structure</a></li>
     <li><a href="#data-base">Database</a></li>
