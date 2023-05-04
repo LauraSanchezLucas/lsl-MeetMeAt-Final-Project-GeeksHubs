@@ -278,6 +278,7 @@ Users logged like an 'Professional' role can access to following endpoint:
         ```
     Only events can be created for the logged business.
 
+</details>
 
 Users logged like an 'admin' role can access to following endpoint:
 
