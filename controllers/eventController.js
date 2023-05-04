@@ -1,4 +1,5 @@
 const { Event, Business, User } = require("../models");
+const { updateRole } = require("./roleController");
 
 const eventController = {};
 
@@ -250,42 +251,44 @@ eventController.deleteEventByProfessionalById = async (req, res) => {
 // UPDATE EVENT BY ADMIN
 eventController.updateEventAdmin = async (req, res) => {
     try {
-        const { name, description, place, date, hour, business_id } = req.body;
-        const roleId = req.params.id;
+        const { name, description, place, date, hour, business_id, image } = req.body;
+        const eventId = req.params.id;
 
-        const existRole = await Role.findOne({
-            where: {
-                id: roleId,
-            },
-        });
-        if (!existRole) {
+        const existEvent = await Event.findByPk(eventId);
+
+        if (!existEvent) {
             return res.status(400).json({
                 success: true,
-                message: "Role not found",
+                message: "Event not found",
             });
         };   
-        const updateRole = await Role.update(
+        const updatedEvent = await Event.update(
             {
+                image: image,
                 name: name,
+                description: description,
+                place: place,
+                hour: hour,
+                business_id: business_id
             },
             {
                 where: {
-                    id: roleId,
+                    id: eventId,
                 },
             }
         );
-        if (!updateRole) {
+        if (!updatedEvent) {
             return res.send({
                 success: false,
-                message: "Can´t update Role",
+                message: "Can´t update Event",
                 error_message: error.message,
             });
         };
         
         return res.send({
             success: true,
-            message: "Update role successfully",
-            updateRole: updateRole,
+            message: "Update event successfully",
+            updatedEvent: updateRole,
         });
     } catch (error) {
         return res.status(500).json({

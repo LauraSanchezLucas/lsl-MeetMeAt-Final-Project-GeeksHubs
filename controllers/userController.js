@@ -26,9 +26,8 @@ userController.profile = async (req, res) => {
 // UPDATE MY OWN PROFILE
 userController.updateProfile = async (req, res) => {
     try {
-        const { name, surname, email, phone, password } = req.body;
+        const { name, surname, email, phone } = req.body;
         const userId = req.userId;
-        const encryptedPassword = bcrypt.hashSync(password, 10);
 
         const updateProfile = await User.update(
             {
@@ -36,7 +35,6 @@ userController.updateProfile = async (req, res) => {
                 surname: surname,
                 email: email,
                 phone: phone,
-                password: encryptedPassword,
             },
             {
                 where: {
@@ -91,9 +89,8 @@ userController.findAllUsersProfesional = async (req, res) => {
 // UPDATE USER BY ADMIN
 userController.updateUserByAdmin = async (req, res) => {
     try {
-        const { name, surname, phone, email, password, role_id } = req.body;
+        const { name, surname, phone, email, role_id } = req.body;
         const userId = req.params.id;
-        const encryptedPassword = bcrypt.hashSync(password, 10);
 
         const existUser = await User.findOne({
             where: {
@@ -112,7 +109,6 @@ userController.updateUserByAdmin = async (req, res) => {
                 surname: surname,
                 phone: phone,
                 email: email,
-                password: encryptedPassword,
                 role_id: role_id
             },
             {
@@ -249,7 +245,7 @@ userController.findUsersProfesional = async (req, res) => {
         const user = await User.findAll({
             where: { role_id: 2 },
             attributes: {
-                exclude: ['id', 'password', 'role_id', 'createdAt', 'updatedAt'],
+                exclude: ['password', 'role_id', 'createdAt', 'updatedAt'],
             },
         });
 

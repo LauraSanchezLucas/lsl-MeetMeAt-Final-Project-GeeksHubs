@@ -66,6 +66,19 @@ businessController.deleteBusinessById = async (req, res) => {
 businessController.createBusiness = async (req, res) => {
     try {
         const { user_id, specialty_id, notes } = req.body;
+
+        const businessExist = await Business.findOne({
+            where: {
+                user_id: user_id
+            }
+        });
+        if(businessExist){
+            return res.status(400).json({
+                success: false,
+                message: "user already has a business"
+            })
+        };
+
         const user = await User.findOne({
             where: {
                 id: user_id,
