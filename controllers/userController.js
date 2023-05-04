@@ -243,5 +243,28 @@ userController.newUserByAdmin = async (req, res) => {
         });
     }
 };
+// FIND ALL USERS PROFESSIONALS.
+userController.findUsersProfesional = async (req, res) => {
+    try {
+        const user = await User.findAll({
+            where: { role_id: 2 },
+            attributes: {
+                exclude: ['id', 'password', 'role_id', 'createdAt', 'updatedAt'],
+            },
+        });
+
+        return res.send({
+            success: true,
+            message: 'Access profiles successfully',
+            user: user,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong',
+            error_message: error.message,
+        });
+    }
+};
 
 module.exports = userController;

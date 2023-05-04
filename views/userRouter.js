@@ -18,5 +18,5 @@ router.put('/updateuserprofile/:id', verifyToken, isAdmin, userController.update
 router.get('/allusers', verifyToken, isAdmin, userController.findAllUsersAdmin);
 router.delete('/cancelluser/:id', verifyToken, isAdmin, userController.deleteUserByAdmin);
 router.post('/newuseradmin', verifyToken, isAdmin, userController.newUserByAdmin);
-
+router.get('/getprofessional', verifyToken, isAdmin, userController.findUsersProfesional);
 module.exports = router;
