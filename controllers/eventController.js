@@ -268,6 +268,7 @@ eventController.updateEventAdmin = async (req, res) => {
                 name: name,
                 description: description,
                 place: place,
+                date: date,
                 hour: hour,
                 business_id: business_id
             },
