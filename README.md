@@ -5,7 +5,6 @@
   <summary>Index</summary>
   <ol>
     <li><a href="#meet-me-at-app">About Meet Me At App</a></li>
-    <li><a href="#deploy">Deploy</a></li>
     <li><a href="#stack">Stack</a></li>
     <li><a href="#diagram-bd">Diagram DB</a></li>
     <li><a href="#local-instalation">Local installation</a></li>
@@ -93,19 +92,14 @@ The database was created using MySQL and Sequelize of Node.js, which facilitates
 
 During the development process, the database was designed with all the relationships, making some modifications to make more sense of the app concept, such as removing the direct relationship between company and appointments and directly relating them to events, as can be seen in the following pictures:
 
-![image](./assets/dataBase.jpg) |![image](./assets//olddb.jpg)|
-|-|-|-|
+![image](./assets/dataBase.jpg) |![image](./assets/olddb.jpg)|
+|-|-|
 
 Then, I was organized in terms of the requirements wanted for the application and all the endpoints of the project were marked.
 
 ![image](./assets/backendpicture.jpg)
 
 However, there were a couple of issues that arose during development.
-
-![image](./img/db1.jpg) |![image](./img/db2.jpg)|
-|-|-|-|
-
-
 
 
 ## Project structure
