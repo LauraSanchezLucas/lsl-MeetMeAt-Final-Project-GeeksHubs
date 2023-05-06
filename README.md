@@ -463,6 +463,7 @@ Below we mention a few functionalities that remain to be implemented in this pro
    - I would like to introduce a feedback model to give the customer the option to write a review which will reach more customers.
    - Add functions to implement more search filters in appointments, events, etc...
    - Add funtions to see future and past events or appointments.
+
 ## Licence
 This project is belonging to license Creative Commons Legal Code.
 
@@ -471,19 +472,23 @@ This project is belonging to license Creative Commons Legal Code.
 To achieve the goal we have collected information from:
 
 [Sequelize documentation](https://sequelize.org/docs/v6/)
+
 [Repository GeeksHubs](https://github.com/GeeksHubs/FSD_VAL_01_2023_SEQUELIZE)
+
 [eventbrite-website](https://www.eventbrite.es/d/spain--valencia/events/)
+
 [website-meetup](https://www.meetup.com/es-ES/)
-Google fonts
+
+[Google fonts](https://fonts.google.com/)
+
 [website-freepik](https://www.freepik.es/)
 
 ## Contact
 Laura Sanchez Lucas
-
 <a href = "laura:lausnclu@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
 <a href="https://www.linkedin.com/in/laura-sanchez-lucas-5b2222251" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 <a href="https://github.com/LauraSanchezLucas" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=red" target="_blank"></a> 
-</p>
+
 
 </div>
 
