@@ -490,5 +490,3 @@ Laura Sanchez Lucas
 <a href="https://github.com/LauraSanchezLucas" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=red" target="_blank"></a> 
 
 
-</div>
-
