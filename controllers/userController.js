@@ -262,5 +262,30 @@ userController.findUsersProfesional = async (req, res) => {
         });
     }
 };
+// SEARCH USER BY EMAIL
+userController.searchAllUserAdmin = async (req, res) => {
+    try {
+        const userEmail = req.params.email;
+        const findUser = await User.findAll({
+            where: {
+                [Op.or]:
+                [{ email:{
+                    [Op.like]: `${userEmail}%`
+                }}]
+            }
+        });
+        return res.send({
+            success: true,
+            message: 'Access profiles successfully',
+            user: findUser,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong',
+            error_message: error.message,
+        });
+    }
+};
 
 module.exports = userController;

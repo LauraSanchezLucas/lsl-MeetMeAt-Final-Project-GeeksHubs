@@ -8,11 +8,10 @@
     <li><a href="#stack">Stack</a></li>
     <li><a href="#diagram-bd">Diagram DB</a></li>
     <li><a href="#local-installation">Local installation</a></li>
-    <li><a href="#how-do-we-do-it">How do we do it</a></li>
+    <li><a href="#how-i-have-done-it">How I have done it</a></li>
     <li><a href="#project-structure">Project structure</a></li>
     <li><a href="#data-base">Database</a></li>
     <li><a href="#endpoints">Endpoints</a></li>
-    <li><a href="#known-bugs">Known bugs</a></li>
     <li><a href="#future-functionalities">Future funtionalities</a></li>
     <li><a href="#licence">Licence</a></li>
     <li><a href="#webgraphy">Webgraphy</a></li>
@@ -68,22 +67,22 @@ Additionally, by providing event management tools, the platform helps businesses
 Steps to make it work on your local computer:
 1. Clone the project on your computer with git bash:
  `$git clone 'url-repository'`
-2. Install all dependencies with the following command:
+1. Install all dependencies with the following command:
  ` $ npm i `
-3. Create a .env file following the template .env.example provided and type all credentials. If you cannot get them, change the parameters for your own local database set up running in docker.
-4.  Start the server with:
+1. Create a .env file following the template .env.example provided and type all credentials. If you cannot get them, change the parameters for your own local database set up running in docker.
+2.  Start the server with:
  ``` $ npm run dev ```
-5. Connect the repository with the database with the following commands:
+1. Connect the repository with the database with the following commands:
  ``` $ npx sequelize-cli db:create ``` 
  ``` $ npx sequelize-cli db:migrate ``` 
  ``` $ npx sequelize-cli db:seed:all ```
 
-6. Import this file in postman to get the endpoints we have created:
+1. Import this file in postman to get the endpoints we have created:
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/security-geologist-20366633/workspace/meet-me-at/collection/27251425-ef405e59-a70e-4b4b-ab64-610e2822de31?action=share&creator=27251425)
 
 
-## How do we do it
-
+## How I have done it
+<div align="center">
 For the development of the application backend, technologies such as Node.js and Express were used to handle user requests and implement API endpoints. JavaScript was used as the main programming language.
 
 To ensure the security of the application, an authentication and authorization system was implemented so that only authorized users have access to certain features of the application through JSON Web Tokens (JWT).
@@ -99,8 +98,7 @@ Then, I was organized in terms of the requirements wanted for the application an
 
 ![image](./assets/backendpicture.jpg)
 
-However, there were a couple of issues that arose during development.
-
+</div>
 
 ## Project structure
 I used model view controller to structure this project. I created a basic CRUD.
@@ -130,15 +128,16 @@ The project will have the following structure:
 -	.env.example: This file manages environment variables.
 
 ## DataBase
-
+<div align="center">
 The MySQL database used in this application has implemented several interconnected tables through relationships that allow for efficient and organized data storage and querying.
 
 In this database, we find one-to-many (1:N) relationships such as between roles and users, allowing a role to have multiple users but a user can only have one role assigned. We also find the same relationship between users and business, and business and specialties. A user can have multiple business associated with them in the "business" table, while each company can only be associated with a specific user. Similarly, a company can have multiple specialties, while each specialty can only be associated with a specific company.
 
 However, we find a many-to-many (N:N) relationship between users and events. This is because several users can be associated with several events through the appointments, and the other way around, an event can have multiple users associated with it through appointments. To implement this relationship, an intermediate table called "appointments" needs to be created, which will contain the foreign keys from the "users" and "events" tables.
-
+</div>
 
 ## Endpoints
+
 This project has 33 endpoints, with JSON Web Tokens authentication system.
 
 Any user can access to:
@@ -458,36 +457,30 @@ Users logged like an 'admin' role can access to following endpoint:
     You must indicate in the url the ID number of the appointment.
 </details>
 
-## Known bugs
-The error that we have encountered when modifying certain functions is:
-
-        Return.status.send is not a function
-the function is working correctly but is not sending the specifically error code.
-
-
 ## Future functionalities
 
 Below we mention a few functionalities that remain to be implemented in this project:
    - I would like to introduce a feedback model to give the customer the option to write a review which will reach more customers.
-   - I would like to be able to block past dates when a business or admin create an event.
-    
-
+   - Add functions to implement more search filters in appointments, events, etc...
+   - Add funtions to see future and past events or appointments.
 ## Licence
 This project is belonging to license Creative Commons Legal Code.
 
 
 ## Webgraphy
 To achieve the goal we have collected information from:
-- [Sequelize documentation](https://sequelize.org/docs/v6/)
-- [Repository GeeksHubs](https://github.com/GeeksHubs/FSD_VAL_01_2023_SEQUELIZE)
-- [eventbrite-website](https://www.eventbrite.es/d/spain--valencia/events/)
-- [website-meetup](https://www.meetup.com/es-ES/)
-- Google fonts
-- [website-freepik] (https://www.freepik.es/)
+ [Sequelize documentation](https://sequelize.org/docs/v6/)
+[Repository GeeksHubs](https://github.com/GeeksHubs/FSD_VAL_01_2023_SEQUELIZE)
+[eventbrite-website](https://www.eventbrite.es/d/spain--valencia/events/)
+[website-meetup](https://www.meetup.com/es-ES/)
+Google fonts
+[website-freepik](https://www.freepik.es/)
 
 ## Contact
-- Laura Sanchez Lucas
-<a href = "lausnclu@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
-<a href="https://www.linkedin.com/in/linkedinUser/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
+Laura Sanchez Lucas
+<a href = "laura:lausnclu@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+<a href="https://www.linkedin.com/in/laura-sanchez-lucas-5b2222251" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 <a href="https://github.com/LauraSanchezLucas" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=red" target="_blank"></a> 
 </p>
+</div>
+
